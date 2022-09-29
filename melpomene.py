@@ -3,7 +3,7 @@ import time
 import badger2040
 badger = badger2040.Badger2040()
 
-FONT_SCALE=0.7
+FONT_SCALE=0.5
 
 def clear_screen():
     badger.pen(15)
@@ -32,31 +32,33 @@ def read_scenario():
     start_node = nodes_dict[start_node_id]
 
     still_playing = True
-    current_node = start_node
+    next_current_node = start_node
 
     while still_playing:
         clear_screen()
 
-        next_current_node = None
+        current_node = next_current_node
 
         if current_node['type'] == 'Start' or current_node['type'] == 'Message':
-            write_text(current_node['message'])
+            write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
             write_text('Press A to continue', 5, 95, scale=FONT_SCALE)
             badger.update()
+
+            next_current_node = nodes_dict[current_node['next']]
+
             while True:
                 if badger.pressed(badger2040.BUTTON_A):
                     break
                 badger.halt()
 
-            next_current_node = nodes_dict[current_node['next']]
-
         if current_node['type'] == 'End':
             final_msg = 'You lost. Press A to continue' if current_node['kind'] == 'Defeat' else 'You won! Congratulations!'
 
             still_playing = False
-            write_text(current_node['message'])
-            write_text(final_msg)
+            write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
+            write_text(final_msg, 5, 20, scale=FONT_SCALE)
             badger.update()
+
             while True:
                 if badger.pressed(badger2040.BUTTON_A):
                     break
@@ -64,10 +66,10 @@ def read_scenario():
 
         if current_node['type'] == 'StoryChoice':
             choices = current_node['choices']
-            write_text(current_node['message'])
+            write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
             i = 1
             for choice in choices:
-                write_text('{}. {}'.format(i, choice.message))
+                write_text('{}. {}'.format(i, choice['message']), 5, 20+i*20, scale=FONT_SCALE)
                 i = i + 1
 
             ans = 0
@@ -90,9 +92,9 @@ def read_scenario():
 
 def main_menu():
     clear_screen()
-    write_text('Welcome to HS3city Adventure Game!', 5, 20, scale=FONT_SCALE)
+    write_text('Welcome to HS3 Adventure Game!', 5, 20, scale=FONT_SCALE)
     write_text('Please pick', 5, 45, scale=FONT_SCALE)
-    write_text('A. Start a new game', 5, 70, scale=FONT_SCALE)
+    write_text('A. Start a new game', 5, 90, scale=FONT_SCALE)
     write_text('B. Exit', 5, 110, scale=FONT_SCALE)
     badger.update()
     while True:
