@@ -69,8 +69,9 @@ def read_scenario():
             write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
             i = 1
             for choice in choices:
-                write_text('{}. {}'.format(i, choice['message']), 5, 20+i*20, scale=FONT_SCALE)
+                write_text('{}. {}'.format(chr(i-1+ord('A')), choice['message']), 5, 20+i*20, scale=FONT_SCALE)
                 i = i + 1
+            badger.update()
 
             ans = 0
             while True:
@@ -114,4 +115,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
