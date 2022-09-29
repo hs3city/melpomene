@@ -65,8 +65,8 @@ def read_scenario():
         if current_node['type'] == 'StoryChoice':
             choices = current_node['choices']
             write_text(current_node['message'])
+            i = 1
             for choice in choices:
-                i = 1
                 write_text('{}. {}'.format(i, choice.message))
                 i = i + 1
 
