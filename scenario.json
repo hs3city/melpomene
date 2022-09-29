@@ -1,0 +1,182 @@
+{
+  "nodes": [
+    {
+      "type": "Start",
+      "id": "node_16642743030220",
+      "message": "Jest ciepły wieczór. Wychodzisz wyrzucić śmieci, otwierasz wiatę i rzucasz worek do kontenera. Myślami jesteś już prawie z powrotem na górze jedząc pizzę, która właśnie przyjechała. ",
+      "next": "node_16642756636002"
+    },
+    {
+      "type": "StoryChoice",
+      "id": "node_16642756636002",
+      "message": "1. Twój wzrok przykuwa jednak coś niewielkiego i migającego. Co robisz?",
+      "previous": "node_16642743030220",
+      "choices": [
+        {
+          "message": "Podchodzisz i podnosisz to z ziemi",
+          "next": "node_166427574066514"
+        },
+        {
+          "message": "Patrzysz przez chwilę i odchodzisz",
+          "next": "node_16642757003659"
+        }
+      ]
+    },
+    {
+      "type": "End",
+      "id": "node_16642757003659",
+      "message": "2.1 Zamykasz drzwi od śmietnika i wracasz do domu. Pizzo, nadchodzę!",
+      "kind": "Defeat",
+      "previous": "node_16642756636002"
+    },
+    {
+      "type": "Message",
+      "id": "node_166427574066514",
+      "message": "2. Urządzenie okazuje się być starą, zakurzoną grą. Na jej ekranie pojawia się rząd kropek...",
+      "previous": "node_16642756636002",
+      "next": "node_166427575171020"
+    },
+    {
+      "type": "Message",
+      "id": "node_166427575171020",
+      "message": "3. ..............................................................",
+      "previous": "node_166427574066514",
+      "next": "node_166427708312526"
+    },
+    {
+      "type": "Message",
+      "id": "node_166427708312526",
+      "message": "4. ...który w końcu zatrzumuje się. Pojedyncza kropka mruga na końcu. Nagle pojawia się napis: ",
+      "previous": "node_166427575171020",
+      "next": "node_166427715472037"
+    },
+    {
+      "type": "StoryChoice",
+      "id": "node_166427715472037",
+      "message": "5. \"Jeśli chcesz przenieść się do Skarbca, naciśnij START\"",
+      "previous": "node_166427708312526",
+      "choices": [
+        {
+          "message": "START",
+          "next": "node_166427726763355"
+        },
+        {
+          "message": "Nic nie wciskasz i wyrzucasz grę do kosza.",
+          "next": "node_166427724431047"
+        }
+      ]
+    },
+    {
+      "type": "End",
+      "id": "node_166427724431047",
+      "message": "6.1 Zamykasz drzwi od śmietnika i wracasz do domu. Pizzo, nadchodzę!",
+      "kind": "Defeat",
+      "previous": "node_166427715472037"
+    },
+    {
+      "type": "Message",
+      "id": "node_166427726763355",
+      "message": "6. Zauważasz smugę jasnego światła, która po chwili przybiera kształt okręgu. Otwiera się portal i jakaś siła wciąga Cię do środka!",
+      "previous": "node_166427715472037",
+      "next": "node_166427728079662"
+    },
+    {
+      "type": "StoryChoice",
+      "id": "node_166427728079662",
+      "message": "7. Dryfujesz w tunelu światła. Tunel nagle się rozdziela, a Ty musisz wybrać, w którą odnogę się skierujesz.",
+      "previous": "node_166427726763355",
+      "choices": [
+        {
+          "message": "lewy",
+          "next": "node_166427732622072"
+        },
+        {
+          "message": "środkowy",
+          "next": "node_166427731289767"
+        },
+        {
+          "message": "prawy",
+          "next": "node_166427735285680"
+        }
+      ]
+    },
+    {
+      "type": "End",
+      "id": "node_166427731289767",
+      "message": "8.2 Wypadasz z tunelu wprost w buzujący wulkan. Umierasz, a w Twoim domu stygnie pizza.",
+      "kind": "Defeat",
+      "previous": "node_166427728079662"
+    },
+    {
+      "type": "StoryChoice",
+      "id": "node_166427732622072",
+      "message": "8.1 Portal wyrzuca Cię w gęstym, dusznym lesie. Słyszysz, jak coś się skrada i porusza liśćmi. Widzisz wielki pasiasty łeb. Rozglądasz się dookoła i chwytasz za:",
+      "previous": "node_166427728079662",
+      "choices": [
+        {
+          "message": "starą gałąź",
+          "next": "node_166427740716485"
+        },
+        {
+          "message": "głaz",
+          "next": "node_166427742888890"
+        },
+        {
+          "message": "kilka owoców",
+          "next": "node_1664278491354110"
+        }
+      ]
+    },
+    {
+      "type": "End",
+      "id": "node_166427735285680",
+      "message": "8.3 Jesteś w mieście, jednak nie jest to miasto jakie znamy współcześnie. Wygląda na to, że przeniosłeś się do przyszłości. ",
+      "kind": "Defeat",
+      "previous": "node_166427728079662"
+    },
+    {
+      "type": "End",
+      "id": "node_166427740716485",
+      "message": "9.1 Zza krzaków wynurza się tygrys. Uderzasz go gałęzią, ale ona się łamie. Tygrys skacze na Ciebie i nastaje ciemność. Budzisz się przed blokiem, zaraz obok śmietnika.",
+      "kind": "Defeat",
+      "previous": "node_166427732622072"
+    },
+    {
+      "type": "StoryChoice",
+      "id": "node_166427742888890",
+      "message": "9.2 Zza krzaków wynurza się tygrys. Rzucasz w niego kamieniem, ale on tylko się rozwścieczył.",
+      "previous": "node_166427732622072",
+      "choices": [
+        {
+          "message": "rzucasz w niego dalej",
+          "next": "node_1664278322727100"
+        },
+        {
+          "message": "uciekasz",
+          "next": "node_1664278329958102"
+        }
+      ]
+    },
+    {
+      "type": "End",
+      "id": "node_1664278322727100",
+      "message": "10.1 Tygrys jeszcze bardziej się rozwścieczył. Rzuca się na Ciebie z pazurami, a Ty nagle budzisz się koło swojego bloku.",
+      "kind": "Defeat",
+      "previous": "node_166427742888890"
+    },
+    {
+      "type": "End",
+      "id": "node_1664278329958102",
+      "message": "10.2 Dajesz dyla, ale tygrys jest szybszy. Czujesz uderzenie w plecy, zamykasz oczy, a gdy je otwierasz jesteś znowu pod blokiem koło śmietnika.",
+      "kind": "Defeat",
+      "previous": "node_166427742888890"
+    },
+    {
+      "type": "End",
+      "id": "node_1664278491354110",
+      "message": "9.3 Rozsypujesz dziwne, czerwone owoce przed sobą. Tygrys bierze je do pyska i po chwili ucieka. Jesteś bezpieczny.",
+      "kind": "Win",
+      "previous": "node_166427732622072"
+    }
+  ]
+}
