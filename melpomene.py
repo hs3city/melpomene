@@ -16,8 +16,8 @@ def write_text(text, x, y, scale):
 
 def choice_with_scroll(choice_node):
     print_things = []
-    print_thing.append(("", choice_node['message']))
-    for choice in choice_node['choices']
+    print_things.append(("", choice_node['message']))
+    for choice in choice_node['choices']:
         print_things.append((choice['next'], choice['message']))
 
     next_id = ""
@@ -26,19 +26,22 @@ def choice_with_scroll(choice_node):
     while still_chosing:
         i = 0
         for print_thing in print_things:
+            clear_screen()
             if i == 0:
-                write_text(print_thing[1])
-                write_text('Press down arrow to see choices')
+                write_text(print_thing[1], 5, 5, scale=FONT_SCALE)
+                write_text('Press down arrow to see choices', 5, 80, scale=FONT_SCALE)
+                badger.update()
                 while True:
-                    if badger.pressed(badger2040.BUTTON_UP):
+                    if badger.pressed(badger2040.BUTTON_DOWN):
                         break
                     badger.halt()
             else:
-                write_text(print_thing[1])
-                write_text('Press down arrow to see more choices')
-                write_text('Press A to select')
+                write_text(print_thing[1], 5, 5, scale=FONT_SCALE)
+                write_text('Press down arrow to see more choices', 5, 80, scale=FONT_SCALE)
+                write_text('Press A to select', 5, 95, scale=FONT_SCALE)
+                badger.update()
                 while True:
-                    if badger.pressed(badger2040.BUTTON_UP):
+                    if badger.pressed(badger2040.BUTTON_DOWN):
                         break
                     if badger.pressed(badger2040.BUTTON_A):
                         still_chosing = False
@@ -93,7 +96,7 @@ def read_scenario():
 
             still_playing = False
             write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
-            write_text(final_msg, 5, 20, scale=FONT_SCALE)
+            write_text(final_msg, 5, 60, scale=FONT_SCALE)
             badger.update()
 
             while True:
