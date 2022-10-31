@@ -14,6 +14,46 @@ def write_text(text, x, y, scale):
     badger.text(text, x, y, scale)
     print(text)
 
+def choice_with_scroll(choice_node):
+    print_things = []
+    print_things.append(("", choice_node['message']))
+    for choice in choice_node['choices']:
+        print_things.append((choice['next'], choice['message']))
+
+    next_id = ""
+
+    still_chosing = True
+    while still_chosing:
+        i = 0
+        for print_thing in print_things:
+            clear_screen()
+            if i == 0:
+                write_text(print_thing[1], 5, 5, scale=FONT_SCALE)
+                write_text('Press down arrow to see choices', 5, 80, scale=FONT_SCALE)
+                badger.update()
+                while True:
+                    if badger.pressed(badger2040.BUTTON_DOWN):
+                        break
+                    badger.halt()
+            else:
+                write_text(print_thing[1], 5, 5, scale=FONT_SCALE)
+                write_text('Press down arrow to see more choices', 5, 80, scale=FONT_SCALE)
+                write_text('Press A to select', 5, 95, scale=FONT_SCALE)
+                badger.update()
+                while True:
+                    if badger.pressed(badger2040.BUTTON_DOWN):
+                        break
+                    if badger.pressed(badger2040.BUTTON_A):
+                        still_chosing = False
+                        next_id = print_thing[0]
+                        break
+                    badger.halt()
+
+            i = (i + 1) % len(print_things)
+            
+
+    return next_id
+
 
 def read_scenario():
     f = open("scenario.json","r")
@@ -56,7 +96,7 @@ def read_scenario():
 
             still_playing = False
             write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
-            write_text(final_msg, 5, 20, scale=FONT_SCALE)
+            write_text(final_msg, 5, 60, scale=FONT_SCALE)
             badger.update()
 
             while True:
@@ -65,31 +105,8 @@ def read_scenario():
                 badger.halt()
 
         if current_node['type'] == 'StoryChoice':
-            choices = current_node['choices']
-            write_text(current_node['message'], 5, 5, scale=FONT_SCALE)
-            i = 1
-            for choice in choices:
-                write_text('{}. {}'.format(chr(i-1+ord('A')), choice['message']), 5, 20+i*20, scale=FONT_SCALE)
-                i = i + 1
-            badger.update()
-
-            ans = 0
-            while True:
-                if badger.pressed(badger2040.BUTTON_A):
-                    ans = 1
-                    break
-                if badger.pressed(badger2040.BUTTON_B):
-                    ans = 2
-                    break
-                if badger.pressed(badger2040.BUTTON_C):
-                    ans = 3
-                    break
-
-            if ans > len(choices):
-                next_current_node = current_node
-                continue
-
-            next_current_node = nodes_dict[choices[ans - 1]['next']]
+            next_node_id = choice_with_scroll(current_node)
+            next_current_node = nodes_dict[next_node_id]
 
 def main_menu():
     clear_screen()
